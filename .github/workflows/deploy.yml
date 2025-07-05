@@ -49,8 +49,8 @@ jobs:
       # Deploy application
       - name: Deploy to cluster
         run: |
-          kubectl config view  --insecure-skip-tls-verify --validate=false # Debug: Show final config
-          kubectl cluster-info --insecure-skip-tls-verify --validate=false # Debug: Verify cluster connection
+          kubectl config view  --insecure-skip-tls-verify # Debug: Show final config
+          kubectl cluster-info --insecure-skip-tls-verify # Debug: Verify cluster connection
           
           # Apply manifests with both insecure and validation flags
           kubectl apply -f k8s/ --insecure-skip-tls-verify --validate=false
