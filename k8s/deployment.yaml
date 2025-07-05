@@ -11,8 +11,6 @@ kind: Deployment
 metadata:
   name: helloworld
 spec:
-  imagePullSecrets:
-    - name: ghcr-secret
   replicas: 2
   selector:
     matchLabels:
@@ -22,6 +20,8 @@ spec:
       labels:
         app: helloworld
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
       - name: helloworld
         image: ghcr.io/kavitate172/helloworld:latest
