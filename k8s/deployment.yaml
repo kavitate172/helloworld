@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: ghcr.io/YOUR_GITHUB_USERNAME/helloworld:latest
+        image: ghcr.io/kavitate172/helloworld:latest
         ports:
         - containerPort: 3000
 ---
