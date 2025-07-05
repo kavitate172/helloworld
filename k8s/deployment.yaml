@@ -4,7 +4,7 @@ metadata:
   name: ghcr-secret
 type: kubernetes.io/dockerconfigjson
 data:
-  .dockerconfigjson: Z2hwX0RTbU5uRFF1QnRhUFpkVHNrSzJURWQzU1pxTkVKcDMyS2MxNQo=
+  .dockerconfigjson: ICAgewogICAgICJhdXRocyI6IHsKICAgICAgICJnaGNyLmlvIjogewogICAgICAgICAiYXV0aCI6ICJaMmh3WDBSVGJVNXVSRkYxUW5SaFVGcGtWSE5yU3pKVVJXUXpVMXB4VGtWS2NETXlTMk14TlFvPSIKICAgICAgIH0KICAgICB9CiAgIH0KICAgCg==
 ---
 apiVersion: apps/v1
 kind: Deployment
