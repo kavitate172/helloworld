@@ -40,6 +40,7 @@ jobs:
 
       - name: Deploy to k3s
         run: |
+          echo "${{ secrets.K3S_KUBECONFIG }}" | base64 -d > kubeconfig.yaml
           kubectl apply -f k8s/deployment.yaml --insecure-skip-tls-verify
           kubectl rollout status deployment/helloworld --insecure-skip-tls-verify
         env:
