@@ -38,12 +38,22 @@ jobs:
       - name: Install kubectl
         uses: azure/setup-kubectl@v3
 
-      - name: Deploy to k3s
+      - name: Configure kubeconfig
         run: |
-          echo "${{ secrets.K3S_KUBECONFIG }}" | base64 -d > kubeconfig.yaml
-          kubectl apply -f k8s/deployment.yaml --insecure-skip-tls-verify
+          mkdir -p ~/.kube
+          echo "${{ secrets.K3S_KUBECONFIG }}" | base64 --decode > kubeconfig.yaml
+          # Fix server URL if needed (uncomment if your kubeconfig points to localhost)
+          # sed -i 's/server: .*/server: https:\/\/35.165.238.50:6443/' kubeconfig.yaml
+          cat kubeconfig.yaml > ~/.kube/config
+
+      # Deploy application
+      - name: Deploy to cluster
+        run: |
+          kubectl config view  # Debug: Show final config
+          kubectl cluster-info  # Debug: Verify cluster connection
+          
+          # Apply manifests with both insecure and validation flags
+          kubectl apply -f k8s/ --insecure-skip-tls-verify --validate=false
           kubectl rollout status deployment/helloworld --insecure-skip-tls-verify
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.K3S_KUBECONFIG }}  # Base64 encoded kubeconfig
 
 
