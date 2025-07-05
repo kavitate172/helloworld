@@ -44,3 +44,4 @@ jobs:
           kubectl rollout status deployment/helloworld --insecure-skip-tls-verify
         env:
           KUBE_CONFIG_DATA: ${{ secrets.K3S_KUBECONFIG }}  # Base64 encoded kubeconfig
+
