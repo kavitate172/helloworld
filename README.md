@@ -30,26 +30,9 @@ K3S_KUBECONFIG: Base64-encoded kubeconfig (cat ~/.kube/config | base64 -w0)
 1. Node.js Application (app.js)
 Simple HTTP server that responds with "Hello World":
 
-javascript
-12 lines
-Click to expand
-const http = require('http');
-const port = 3000;
-...
 2. Dockerfile
 Container configuration for the Node.js app:
 
-dockerfile
-
-Run
-Copy code
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD ["node", "app.js"]
 3. Kubernetes Manifests (k8s/)
 deployment.yaml: Defines the app deployment with 2 replicas
 service.yaml: Creates a ClusterIP service exposing port 80
@@ -71,20 +54,3 @@ Login to GitHub Container Registry
 Build and push Docker image
 Install kubectl
 Deploy to k3s cluster
-🧪 Testing
-After deployment:
-
-bash
-
-Run
-Copy code
-kubectl get pods
-kubectl get svc
-kubectl logs <pod-name>
-🔧 Troubleshooting
-Common issues:
-
-Image pull errors: Verify GHCR secrets and permissions
-Deployment failures: Check kubectl logs and events
-Connection issues: Validate kubeconfig and network policies
-🤝 Contributing
